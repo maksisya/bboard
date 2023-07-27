@@ -10,4 +10,8 @@ class Ad_type extends Model
     use HasFactory;
 
     protected $table = 'ad_types';
+
+    protected $fillable = ['name'];
+
+    public $timestamps = false;
 }
