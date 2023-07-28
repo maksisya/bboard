@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdTypeController;
 use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Models\Ad_type;
 use App\Models\Advertisement;
@@ -22,6 +23,11 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+Route::post('/register', [AuthController::class, 'register']); // регистрация пользователя
+Route::post('/login', [AuthController::class, 'login']); // авторизация, возвращает токен
+Route::post('/logout', [AuthController::class, 'logout']); // делает недействительным токен
+Route::post('/refresh', [AuthController::class, 'refresh']); // обновить токен пользователя
 
 Route::get('/ad_types', [AdTypeController::class, 'index']); // получить список типов (услуга или товар)
 Route::get('/ad_types/{type_id}', [AdTypeController::class, 'show']); // получить конкретный тип
