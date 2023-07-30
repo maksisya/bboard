@@ -35,9 +35,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/ad_types', [AdTypeController::class, 'index']); // получить список типов (услуга или товар)
     Route::get('/ad_types/{type_id}', [AdTypeController::class, 'show']); // получить конкретный тип
 
-    Route::get('/advertisement', [AdvertisementController::class, 'index']); // информация о всех объявлениях
-    Route::get('/advertisement/{ad_id}', [AdvertisementController::class, 'show']); // информация о конкретноим объявлении
-    Route::post('/advertisement', [AdvertisementController::class, 'store']); // добавление объявления
+    Route::get('/advertisements', [AdvertisementController::class, 'index']); // информация о всех объявлениях
+    Route::get('/advertisements/my', [AdvertisementController::class, 'show_my']); // информация об объявлениях пользователя
+    Route::get('/advertisements/{ad_id}', [AdvertisementController::class, 'show']); // информация о конкретноим объявлении
+    Route::post('/advertisements', [AdvertisementController::class, 'store']); // добавление объявления
+    Route::put('/advertisements/{ad_id}', [AdvertisementController::class, 'update']); // обновление инофрмации в объявлении
+    Route::delete('/advertisements/{ad_id}', [AdvertisementController::class, 'delete']); // удаление объявления
 
     Route::get('/category', [CategoryController::class, 'index']); // получить список категорий
     Route::get('/category/{cat_id}', [CategoryController::class, 'show']); // получить информацию о конкретной категории
