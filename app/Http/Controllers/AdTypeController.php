@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\AdTypeResource;
 use App\Models\Ad_type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+// use Tymon\JWTAuth\Contracts\Providers\Auth;
 
 class AdTypeController extends Controller
 {
@@ -20,7 +23,7 @@ class AdTypeController extends Controller
         if (!$ad_type) {
             return ['failed'];
         }
-        return new AdTypeResource($ad_type);
+        return [$ad_type];
     }
 
 }

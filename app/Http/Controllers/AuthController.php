@@ -32,7 +32,7 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = Auth::user();
+        $user = auth()->user();
         return response()->json([
                 'status' => 'success',
                 'user' => $user,
@@ -94,7 +94,7 @@ class AuthController extends Controller
             'status' => 'success',
             'user' => auth()->user(),
             'authorisation' => [
-                'token' => auth()->refresh,
+                'token' => auth()->refresh(),
                 'type' => 'bearer',
             ]
         ]);

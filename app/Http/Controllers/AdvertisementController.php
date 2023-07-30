@@ -29,7 +29,7 @@ class AdvertisementController extends Controller
             // 'user_id' => $request->input('user_id'),
             // 'category_id' => $request->input('category_id'),
             // 'ad_type_id' => $request->input('ad_type_id'),
-            'user_id' => 1, // для отладки
+            'user_id' => auth()->id(), // для отладки
             'category_id' => 1, // для отладки
             'ad_type_id' => 1, // для отладки
             'title' => $request->input('title'),

@@ -24,35 +24,22 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/register', [AuthController::class, 'register']); // регистрация пользователя
-Route::post('/login', [AuthController::class, 'login']); // авторизация, возвращает токен
-Route::post('/logout', [AuthController::class, 'logout']); // делает недействительным токен
-Route::post('/refresh', [AuthController::class, 'refresh']); // обновить токен пользователя
+Route::controller(AuthController::class)->group(function () {    
+    Route::post('/register', 'register'); // регистрация пользователя
+    Route::post('/login', 'login')->name('login'); // авторизация, возвращает токен
+    Route::post('/logout', 'logout'); // делает недействительным токен
+    Route::post('/refresh', 'refresh'); // обновить токен пользователя
+});
 
-Route::get('/ad_types', [AdTypeController::class, 'index']); // получить список типов (услуга или товар)
-Route::get('/ad_types/{type_id}', [AdTypeController::class, 'show']); // получить конкретный тип
+Route::middleware(['auth'])->group(function () {
+    Route::get('/ad_types', [AdTypeController::class, 'index']); // получить список типов (услуга или товар)
+    Route::get('/ad_types/{type_id}', [AdTypeController::class, 'show']); // получить конкретный тип
 
-Route::get('/advertisement', [AdvertisementController::class, 'index']); // информация о всех объявлениях
-Route::get('/advertisement/{ad_id}', [AdvertisementController::class, 'show']); // информация о конкретноим объявлении
-Route::post('/advertisement', [AdvertisementController::class, 'store']); // добавление объявления
+    Route::get('/advertisement', [AdvertisementController::class, 'index']); // информация о всех объявлениях
+    Route::get('/advertisement/{ad_id}', [AdvertisementController::class, 'show']); // информация о конкретноим объявлении
+    Route::post('/advertisement', [AdvertisementController::class, 'store']); // добавление объявления
 
-Route::get('/category', [CategoryController::class, 'index']); // получить список категорий
-Route::get('/category/{cat_id}', [CategoryController::class, 'show']); // получить информацию о конкретной категории
-Route::post('/category', [CategoryController::class, 'store']); // добавить объявление
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    Route::get('/category', [CategoryController::class, 'index']); // получить список категорий
+    Route::get('/category/{cat_id}', [CategoryController::class, 'show']); // получить информацию о конкретной категории
+    Route::post('/category', [CategoryController::class, 'store']); // добавить объявление
+});
