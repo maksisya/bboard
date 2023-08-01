@@ -54,6 +54,10 @@ class AdvertisementController extends Controller
         if (!$advertisement) {
             return ['Ad does not exist!'];
         }
+
+        if (auth()->id() !== $advertisement->user_id) {
+            return ["You dont't have enough permissions!"];
+        }
         
         $advertisement->category_id = $request->input('category_id');
         $advertisement->ad_type_id = $request->input('ad_type_id');
@@ -70,9 +74,13 @@ class AdvertisementController extends Controller
     public function delete(int $ad_id)
     {
         $advertisement = Advertisement::find($ad_id);
-        
+
         if (!$advertisement) {
             return ['Ad does not exist!'];
+        }
+
+        if (auth()->id() !== $advertisement->user_id) {
+            return ["You dont't have enough permissions!"];
         }
 
         $advertisement->delete();

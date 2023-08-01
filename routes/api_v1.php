@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::controller(AuthController::class)->group(function () {    
+Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register'); // регистрация пользователя
     Route::post('/login', 'login')->name('login'); // авторизация, возвращает токен
     Route::post('/logout', 'logout'); // делает недействительным токен
